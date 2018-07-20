@@ -4,6 +4,6 @@ class Field
 {
     public:
     int number;
-    bool bomb;
+    void setCheck(bool check);
     bool check;
 };
