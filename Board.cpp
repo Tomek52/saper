@@ -31,6 +31,7 @@ void Board::showBoard()
             {
                 std::cout<<board[i][j].number;
             }
+            std::cout<<" ";
         }
         std::cout<<std::endl;
     }
@@ -60,12 +61,21 @@ void Board::addBombs(int numberOfBombs)
     }
 }
 
-void Board::interface(int x, int y)
+int Board::interface(int x, int y)
 {
+    static int numberOfCheckFields = 0;
     board[x][y].setCheck(true);
     showBoard();
     if(board[x][y].number<0)
     {
         std::cout<<"Game over"<<std::endl;
+        return -1;
     }
+    if(++numberOfCheckFields>=90)
+    {
+        std::cout<<"You won"<<std::endl;
+        return -1;
+    }
+    std::cout<<numberOfCheckFields<<std::endl;
+    return 0;
 }
