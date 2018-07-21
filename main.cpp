@@ -3,7 +3,7 @@
 int main()
 {
     std::cout<<"Hello this is saper game, in this beta version there are 10 bombs marked as + sign, the board size is 10x10, let's start the game!"<<std::endl;
-    Board saper;
+    Board saper(10);
     int x;
     int y;
     int state=0;

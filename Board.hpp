@@ -5,11 +5,13 @@
 
 class Board
 {
+    int bombs_;
     public:
     Field board[10][10];
-    Board();
+    Board(int bombs);
     void showBoard();
     void addBombs(int numberOfBombs);
     int interface(int x, int y); 
     void checkField(int x, int y);
+    int victory();
 };

@@ -1,6 +1,7 @@
 #include "Board.hpp"
 
-Board::Board()
+Board::Board(int bombs)
+    : bombs_(bombs)
 {
     for(int i=0; i<10; i++)
     {
@@ -10,7 +11,7 @@ Board::Board()
             board[i][j].setCheck(false);
         }
     }
-    addBombs(10);
+    addBombs(bombs_);
 }
 
 void Board::showBoard()
@@ -74,6 +75,11 @@ int Board::interface(int x, int y)
     {
         checkField(x,y);
         showBoard();
+        if(victory()==bombs_)
+        {
+            std::cout<<"You won"<<std::endl;
+            return -1;
+        }
     }
     return 0;
 }
@@ -102,4 +108,17 @@ void Board::checkField(int x, int y)
        }
    }
    
+}
+
+int Board::victory()
+{
+    int bombs;
+    for (int i=0;i<10;i++)
+    {
+        for(int j=0;j<10;j++)
+        {
+            if(board[i][j].getCheck()==false) bombs++;
+        }
+    }
+    return bombs;
 }
