@@ -7,7 +7,7 @@ Board::Board()
         for(int j=0; j<10; j++)
         {
             board[i][j].number = 0;
-            board[i][j].check = false;
+            board[i][j].setCheck(false);
         }
     }
     addBombs(10);
@@ -19,7 +19,7 @@ void Board::showBoard()
     {
         for(int j=0; j<10; j++)
         {
-            if(board[i][j].check == false)
+            if(board[i][j].getCheck() == false)
             {
                 std::cout<<" ";
             }
@@ -63,19 +63,43 @@ void Board::addBombs(int numberOfBombs)
 
 int Board::interface(int x, int y)
 {
-    static int numberOfCheckFields = 0;
-    board[x][y].setCheck(true);
-    showBoard();
     if(board[x][y].number<0)
     {
+        board[x][y].setCheck(true);
+        showBoard();
         std::cout<<"Game over"<<std::endl;
         return -1;
     }
-    if(++numberOfCheckFields>=90)
+    else
     {
-        std::cout<<"You won"<<std::endl;
-        return -1;
+        checkField(x,y);
+        showBoard();
     }
-    std::cout<<numberOfCheckFields<<std::endl;
     return 0;
+}
+
+void Board::checkField(int x, int y)
+{
+   if(board[x][y].number<0) return;
+   else if(x<0) return;
+   else if(y<0) return;
+   else if(x>9) return;
+   else if(x>9) return;
+   else if(!board[x][y].getCheck())
+   {
+       board[x][y].setCheck(true);
+       if(board[x][y].number>0) return;
+       else
+       {
+           checkField(x-1,y-1);
+           checkField(x-1,y);
+           checkField(x-1,y+1);
+           checkField(x+1,y-1);
+           checkField(x+1,y);
+           checkField(x+1,y+1);
+           checkField(x,y-1);
+           checkField(x,y+1);
+       }
+   }
+   
 }

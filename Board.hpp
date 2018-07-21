@@ -11,4 +11,5 @@ class Board
     void showBoard();
     void addBombs(int numberOfBombs);
     int interface(int x, int y); 
+    void checkField(int x, int y);
 };
